@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+a closure is when you enclose a function in another, usually with the intention of referencing outside information.
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +64,11 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+it is where the return function() code is, as that is a function nested within another.
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+the name is the same, but the number won't be. 
 c. What is the lexical scope of `newRoll`? 
+it can draw from anything outside, but can only be drawn from by things within the nested function.
 
 ### Task 2c - Exit Ticket
 

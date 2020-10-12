@@ -28,9 +28,13 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * counter 1 is a higher order function that is seperate from the function that is actually running the code, while counter 2 is just one function without any seperate layers.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * counter 1 uses a closure because, like i said, it's a higher order function. It uses the code of another function and slaps it into itself. 
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * counter 1 would be preferable if you needed to keep data around, such as in a scoreboard. counter 2 is much more generic in the way that it only works once, then resets after the code has been ran. 
  *
 */
 
@@ -56,11 +60,13 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning(){
 
-    /*Code Here*/
+  return Math.round(Math.random() * 2)
 
+  
 }
+
 
 /* Task 3: finalScore()
 
@@ -76,11 +82,20 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callback, num){
+  let score = {
+    'Home': 0,
+    'Away': 0,
+  }
+  for(let i = 0; i < num; i++){
+    score.Home += callback();
+    score.Away += callback();
+  }
+  return score
+  }
 
-  /*Code Here*/
 
-}
+console.log(finalScore(inning, 9))
 
 /* Task 4: 
 
@@ -103,8 +118,20 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore, inning, num) {
+  let total = {
+    'Home': 0,
+    'Away': 0,
+  }
+  for(let i = 0; i < num; i++){
+    let score = getInningScore(inning, num);
+    total.Home += score.Home;
+    total.Away += score.Away;
+    console.log(`inning${i}: Away ${total.Away} - Home ${total.Home}`)
+  }
+  return `Final Score Home ${total.Home} - Away ${total.Away}`
 }
+
+console.log(scoreboard(finalScore, inning, 9))
 
 
